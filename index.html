@@ -38,7 +38,7 @@
   <div class="l-container">
     <h2>Friends</h2>
 
-    <button class="l-btn l-btn-main">Go</button>
+    <button class="l-btn l-btn-main" ng-click="findFriends(findFriend.name)">Go</button>
     <input ng-model="findFriend.name" type="text" placeholder="Find Friends">
     <select ng-model="sortReverse" ng-options="option.value as option.display for option in sortOptions"></select>
     <div class="friendList" ng-repeat ="friend in myProfile.friends | filter: findFriend.name | orderBy: 'name' : sortReverse">
@@ -55,13 +55,14 @@
 		<div id="myModal">
 			<div>
 				<div class="modalTitle">
-				<span class="closeBtn"></span>
+				<span class="closeBtn" ng-click="removeFriend()"></span>
 					Add Friends
 				</div>
 					<br />
 				<div class="friendList">
-					<span class="friend"></span> Potential Friends
-				</div>
+					<span class="friend" ng-repeat="friend in potentialFriends"></span> Potential Friends {{friend.name}}
+          <button ng-click="addFriend(friend._id)">Add</button>
+        </div>
 			</div>
 		</div>
 	</div>
@@ -70,6 +71,7 @@
 <script src="app.js"></script>
 <script src="homeCtrl.js"></script>
 <script src="profileService.js"></script>
+<script src="friendService.js"></script>
 </body>
 
 </html>
